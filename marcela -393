@@ -1,0 +1,71 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+class Mahasiswa {
+    String nama;
+    String nim;
+    String jurusan;
+
+    Mahasiswa(String nama, String nim, String jurusan) {
+        this.nama = nama;
+        this.nim = nim;
+        this.jurusan = jurusan;
+    }
+}
+
+public class Main {
+    static ArrayList<Mahasiswa> daftarMahasiswa = new ArrayList<Mahasiswa>();
+
+    public static void tambahMahasiswa(String nama, String nim, String jurusan) {
+        Mahasiswa mhsBaru = new Mahasiswa(nama, nim, jurusan);
+        daftarMahasiswa.add(mhsBaru);
+        System.out.println("Data mahasiswa berhasil ditambahkan.");
+    }
+
+    public static void tampilkanDataMahasiswa() {
+        System.out.println("Data Mahasiswa:");
+        for (Mahasiswa mhs : daftarMahasiswa) {
+            System.out.println("Nama: " + mhs.nama + ", NIM: " + mhs.nim + ", Jurusan: " + mhs.jurusan);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Menu:");
+            System.out.println("1. Tambah Data Mahasiswa");
+            System.out.println("2. Tampilkan Data Mahasiswa");
+            System.out.println("3. Keluar");
+            System.out.print("Pilihan Anda: ");
+            int pilihan = scanner.nextInt();
+
+            switch (pilihan) {
+                case 1:
+                    System.out.print("Masukkan nama mahasiswa: ");
+                    scanner.nextLine();
+                    String namaMhs = scanner.nextLine();
+                    System.out.print("Masukkan NIM mahasiswa: ");
+                    String nimMhs = scanner.nextLine();
+                    while (nimMhs.length() != 15) {
+                        System.out.println("Nim Harus 15 Digit!!!");
+                        System.out.print("Masukkan NIM mahasiswa: ");
+                        nimMhs = scanner.nextLine();
+                    }
+                    System.out.print("Masukkan jurusan mahasiswa: ");
+                    String jurusanMhs = scanner.nextLine();
+                    tambahMahasiswa(namaMhs, nimMhs, jurusanMhs);
+                    break;
+                case 2:
+                    tampilkanDataMahasiswa();
+                    break;
+                case 3:
+                    System.out.println("Adios");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid.");
+            }
+        }
+    }
+}
